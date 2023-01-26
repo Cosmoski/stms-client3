@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+//todo - dodac reduxowa obsłyge stanu dla radiobuttonow itd
+
+import React, { useState } from 'react';
+import axios from "axios";
+import FilterForm from './components/FilterForm'
+import AddTaskForm from './components/AddTaskForm';
+import TaskListForm from './components/TaskListForm';
+
+const App: React.FC = () => {
+
+  const[dataSource, setDataSource] = useState([]); 
+
+  const baseURL = "https://localhost:7214/api/task"; 
+  
+  async function GetTaskWithParams(params:any)
+  {
+    await axios.get(baseURL, {params, headers:{'Content-Type': 'application/json; charset=utf-8'}}).then((response) =>{
+      setDataSource(response.data);
+    });  
+  }  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>   
+      <AddTaskForm/>   
+      <FilterForm/>
+      <TaskListForm/> 
     </div>
-  );
-}
+  )
+};
 
 export default App;
