@@ -1,6 +1,3 @@
-
-//todo - dodac reduxowa obsłyge stanu dla radiobuttonow itd
-
 import React, { useState } from 'react';
 import axios from "axios";
 import FilterForm from './components/FilterForm'

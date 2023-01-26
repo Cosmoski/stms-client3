@@ -1,7 +1,6 @@
 import { Button, Form, Input, InputNumber, Radio, RadioChangeEvent, Space, Switch, Table } from "antd";
 import { useDeleteTasksMutation, useGetTasksQuery, useSetTaskAsCompletedMutation, useUpdateTasksMutation } from "../features/api-slice";
 import { Task, TaskQuery, TaskType } from "../models";
-import {useAppDispatch, useAppSelector} from '../app/hooks'
 import { useState } from "react";
 import { MinusCircleOutlined} from '@ant-design/icons';
 

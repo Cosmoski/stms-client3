@@ -2,17 +2,16 @@ import { Button, Form, InputNumber, Select, Switch } from "antd";
 import { useDeleteAllCompletedTasksMutation, useGetTasksQuery } from "../features/api-slice";
 import { TaskQuery, TaskType } from "../models";
 
-const FilterForm: React.FC = () => {
+export default function FilterForm () {
     const {data: getAllTasksRedux} = useGetTasksQuery(new TaskQuery());
-    const [deleteAllCompletedTasksRedux] = useDeleteAllCompletedTasksMutation();
-    
-    
+    const [deleteAllCompletedTasksRedux] = useDeleteAllCompletedTasksMutation();   
+
     async function DeleteAllCompleted () 
     {
       await deleteAllCompletedTasksRedux({});   
     }
 
-    const FilterTasks = (values:any) => { 
+    async function FilterTasks(values:any) { 
         const taskQuery = new TaskQuery();
     
         if(values["completed"] !== undefined)
@@ -24,11 +23,12 @@ const FilterForm: React.FC = () => {
         if(values["taskType"] !== undefined)
           taskQuery.TaskType = values["taskType"];  
     
-          useGetTasksQuery(taskQuery);    
-      }
+          await useGetTasksQuery(taskQuery);     
+    }
+  
 
 return (
-    <Form onFinish={FilterTasks} onReset={FilterTasks} layout="inline">
+    <Form onFinish={FilterTasks} onReset={FilterTasks} layout="inline">   
         <Form.Item name="priority" >
             <InputNumber min={0} max={5} placeholder="Priorytet"/>
         </Form.Item>
@@ -56,4 +56,3 @@ return (
 )
 }
 
-export default FilterForm;
