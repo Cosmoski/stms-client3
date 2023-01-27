@@ -138,6 +138,12 @@ const TaskListForm: React.FC = () =>
         {
           title: "",
           render: (_:any, record:any) =>{
+            if(editingRow === record.id){
+              return (<Button type="link" htmlType="submit">
+              Save
+            </Button>
+            )
+            } else {
             return (
               <>
                 <Button   
@@ -151,15 +157,12 @@ const TaskListForm: React.FC = () =>
                       priority: record.priority,
                       completed: record.completed
                     });
-                }}> Edit</Button>
-                <Button type="link" htmlType="submit">
-                  Save
-                </Button>
-                <Button   
-                  type="link" 
-                  onClick={() => {         
-                  setTaskAsCompletedRedux(record.id);      
-                }}> Zakończ zadanie</Button>
+                }}> Edit</Button>    
+                  <Button   
+                      type="link" 
+                      onClick={() => {      
+                          setTaskAsCompletedRedux(record.id);      
+                        }}> Zakończ zadanie</Button>            
                 <MinusCircleOutlined style={{color:"red"}}
                   onClick={() => {    
                     deleteTaskRedux(record.id);
@@ -167,6 +170,7 @@ const TaskListForm: React.FC = () =>
               </>
             );
           }
+        }
         },
       ];
 
