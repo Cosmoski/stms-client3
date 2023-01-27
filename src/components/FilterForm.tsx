@@ -1,9 +1,9 @@
 import { Button, Form, InputNumber, Select, Switch } from "antd";
 import { useDeleteAllCompletedTasksMutation, useGetTasksQuery } from "../features/api-slice";
 import { TaskQuery, TaskType } from "../models";
+import { setGlobalState } from "../app/state";
 
 export default function FilterForm () {
-    const {data: getAllTasksRedux} = useGetTasksQuery(new TaskQuery());
     const [deleteAllCompletedTasksRedux] = useDeleteAllCompletedTasksMutation();   
 
     async function DeleteAllCompleted () 
@@ -14,18 +14,18 @@ export default function FilterForm () {
     async function FilterTasks(values:any) { 
         const taskQuery = new TaskQuery();
     
-        if(values["completed"] !== undefined)
-          taskQuery.Completed = values["completed"];
+        if(values["completedEdit"] !== undefined)
+          taskQuery.Completed = values["completedEdit"];
         if(values["priority"] === 0)
           values["priority"] = undefined;
         if(values["priority"] !== undefined)
           taskQuery.Priority = values["priority"];
         if(values["taskType"] !== undefined)
           taskQuery.TaskType = values["taskType"];  
-    
-          await useGetTasksQuery(taskQuery);     
+   
+         setGlobalState("filter", taskQuery);           
     }
-  
+   
 
 return (
     <Form onFinish={FilterTasks} onReset={FilterTasks} layout="inline">   
@@ -42,7 +42,7 @@ return (
                 }
             </Select>
         </Form.Item>
-        <Form.Item name="completed" label="Zakończone">
+        <Form.Item name="completedEdit" label="Zakończone">
             <Switch />
         </Form.Item>
         <Form.Item>

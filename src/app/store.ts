@@ -1,8 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
-import { Store } from 'antd/es/form/interface';
 import { apiSlice } from '../features/api-slice';
 
-export const store = configureStore({
+export const store = configureStore({    
     reducer:{
         [apiSlice.reducerPath]: apiSlice.reducer, 
     },

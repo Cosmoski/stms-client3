@@ -1,33 +1,32 @@
 import { Button, Form, Input, InputNumber, Radio, RadioChangeEvent, Space, Switch, Table } from "antd";
 import { useDeleteTasksMutation, useGetTasksQuery, useSetTaskAsCompletedMutation, useUpdateTasksMutation } from "../features/api-slice";
-import { Task, TaskQuery, TaskType } from "../models";
+import { Task, TaskType } from "../models";
 import { useState } from "react";
 import { MinusCircleOutlined} from '@ant-design/icons';
-
+import { useGlobalState } from "../app/state";
 
 const TaskListForm: React.FC = () =>
 {
-    const {data: getAllTasksRedux} = useGetTasksQuery(new TaskQuery());
-    const [setTaskAsCompletedRedux] = useSetTaskAsCompletedMutation();
-    const [deleteTaskRedux] = useDeleteTasksMutation();
-    const [updateTaskRedux] = useUpdateTasksMutation();
-    const[form] = Form.useForm();
-    const[taskTypeEdit, setTaskTypeEdit] = useState(0);
-    const[editingRow, setEditingRow] = useState(null);
-    const radioOnChangeEdit = (e: RadioChangeEvent) => {
-        setTaskTypeEdit(e.target.value);
-      }; 
-    async function updateTask (values:any){    
-    const changeTask: Task = new Task(
-        values["description"], 
-        values["taskType"], 
-        values["priority"], 
-        values["completed"], 
-        false,
-        values["id"]);    
+  const [useFilter] = useGlobalState("filter");
+  const {data: getAllTasksRedux} = useGetTasksQuery(useFilter); //TaskType.EMAIL, 1, false
+  const [setTaskAsCompletedRedux] = useSetTaskAsCompletedMutation();
+  const [deleteTaskRedux] = useDeleteTasksMutation();
+  const [updateTaskRedux] = useUpdateTasksMutation();
+  const[form] = Form.useForm();
+  const[taskTypeEdit, setTaskTypeEdit] = useState(0);
+  const[editingRow, setEditingRow] = useState(null);
+  const radioOnChangeEdit = (e: RadioChangeEvent) => {
+      setTaskTypeEdit(e.target.value);
+    }; 
+  async function updateTask (values:any){    
+  const changeTask: Task = new Task(
+      values["description"], 
+      values["taskType"], 
+      values["priority"], 
+      values["completed"], 
+      false,
+      values["id"]);    
     
-    let json:string = JSON.stringify(changeTask);
-
     updateTaskRedux(changeTask);
 
     setEditingRow(null);

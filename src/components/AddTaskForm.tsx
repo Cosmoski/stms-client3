@@ -42,7 +42,7 @@ return (
         <Form.Item name="priority" label="Priorytet" rules={[{required:true,message:"Pole wymagane"}]}>
             <InputNumber min={1} max={5}  />
         </Form.Item>
-        <Form.Item name="completed" label="Wykonane">
+        <Form.Item name="completed" label="Zakończone">
             <Switch />
         </Form.Item>
         <Form.Item>
