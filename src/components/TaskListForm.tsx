@@ -18,7 +18,8 @@ const TaskListForm: React.FC = () =>
   const radioOnChangeEdit = (e: RadioChangeEvent) => {
       setTaskTypeEdit(e.target.value);
     }; 
-  async function updateTask (values:any){    
+
+  function updateTask (values:any){    
   const changeTask: Task = new Task(
       values["description"], 
       values["taskType"], 

@@ -11,7 +11,7 @@ const AddTaskForm: React.FC = () => {
         setTaskType(e.target.value);
       };
     const [addNewTaskRedux] = useAddTasksMutation();
-    async function addNewTask (values:any){    
+    function addNewTask (values:any){    
         const newTask: Task = new Task(      
           values["description"], 
           values["taskType"], 

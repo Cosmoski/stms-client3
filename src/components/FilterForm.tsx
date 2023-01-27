@@ -11,7 +11,7 @@ export default function FilterForm () {
       await deleteAllCompletedTasksRedux({});   
     }
 
-    async function FilterTasks(values:any) { 
+    function FilterTasks(values:any) { 
         const taskQuery = new TaskQuery();
     
         if(values["completedEdit"] !== undefined)
