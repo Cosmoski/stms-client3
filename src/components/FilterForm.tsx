@@ -28,7 +28,7 @@ export default function FilterForm () {
    
 
 return (
-    <Form onFinish={FilterTasks} onReset={FilterTasks} layout="inline">   
+    <Form onFinish={FilterTasks} onReset={FilterTasks} layout="inline" key={"filterForm"}>    
         <Form.Item name="priority" >
             <InputNumber min={0} max={5} placeholder="Priorytet"/>
         </Form.Item>
@@ -37,7 +37,7 @@ return (
                 {            
                     Object.values(TaskType).map((type) =>{
                         if(typeof type === 'string')
-                        return (<option value={type} key={type}>{type}</option>);
+                        return (<Select.Option value={type} key={type}>{type}</Select.Option>);
                         })
                 }
             </Select>

@@ -1,18 +1,20 @@
-import { useState } from "react";
 import { useTestOcelotQuery } from "../features/api-slice";
+import { TestOcelotMsg } from "../models";
 
 export default function TestOcelotLabel () {
 
     const {data} = useTestOcelotQuery(); 
   
     let content = JSON.stringify(data);
-    console.log(data);
-    console.log(content);
+    //console.log(content);
+    let stringSplit:string = ''
+    if(typeof content !== 'undefined')
+        stringSplit = content.substring(8, 49);
+
 
     return ( 
-        <div>
-            <h5> {content}</h5>               
-
+        <div key={stringSplit.length}>
+            <h5> {stringSplit}</h5>   
         </div>  
 
     )

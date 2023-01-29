@@ -52,3 +52,14 @@ export class TaskQuery{
         this.Completed = completed;
     }
 }
+
+
+export class TestOcelotMsg{   
+    Msg: string;
+
+    constructor(Msg: string)
+    {
+        this.Msg = Msg;
+    }
+}
+

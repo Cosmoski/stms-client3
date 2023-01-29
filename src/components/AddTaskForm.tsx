@@ -27,19 +27,19 @@ const AddTaskForm: React.FC = () => {
       }
       
 return (
-    <Form form={formAdd} onFinish={addNewTask}>
+    <Form form={formAdd} onFinish={addNewTask} key={"addForm"}>
         <br/>
-        <Form.Item name="description" rules={[{required:true,message:"Pole wymagane"}]}>
+        <Form.Item name="description" rules={[{required:true, message:"Pole wymagane"}]}>
             <Input placeholder="Wpisz zadanie" style={{ width: 'calc(100% - 200px)' }}  />
         </Form.Item>
-        <Form.Item name="taskType" label="Typ zadania " rules={[{required:true,message:"Pole wymagane"}]}>
+        <Form.Item name="taskType" label="Typ zadania " rules={[{required:true, message:"Pole wymagane"}]}>
             <Radio.Group onChange={radioOnChange} value={taskType}>     
-                <Radio value={TaskType.EMAIL}>Email</Radio>
-                <Radio value={TaskType.TELEFON}>Telefon</Radio>
-                <Radio value={TaskType.ZADANIE}>Zadanie</Radio>  
+                <Radio key={0} value={TaskType.EMAIL}>Email</Radio>
+                <Radio key={1} value={TaskType.TELEFON}>Telefon</Radio>
+                <Radio key={2} value={TaskType.ZADANIE}>Zadanie</Radio>  
             </Radio.Group>
         </Form.Item>
-        <Form.Item name="priority" label="Priorytet" rules={[{required:true,message:"Pole wymagane"}]}>
+        <Form.Item name="priority" label="Priorytet" rules={[{required:true, message:"Pole wymagane"}]}>
             <InputNumber min={1} max={5}  />
         </Form.Item>
         <Form.Item name="completed" label="Zakończone">

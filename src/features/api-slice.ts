@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import { NewTask, Task, TaskQuery } from '../models';
+import { NewTask, Task, TaskQuery, TestOcelotMsg } from '../models';
 
 export const apiSlice = createApi({
     reducerPath: 'api',
@@ -58,7 +58,7 @@ export const apiSlice = createApi({
                 }),
                 invalidatesTags: ['Tasks']  
             }),
-            testOcelot: builder.query<string, void>({                
+            testOcelot: builder.query<TestOcelotMsg, void>({                
                 query: ()=> '/testOcelot',
                 providesTags: ['Tasks']  
             }),

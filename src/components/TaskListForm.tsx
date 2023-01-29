@@ -36,12 +36,12 @@ const TaskListForm: React.FC = () =>
     const columns:any = [
         {
           title: "Id",
-          dataIndex: "id",
+          dataIndex: "id",          
           render: (text:any, record:any) =>{
             if(editingRow === record.id){
               return (
                 <Form.Item
-                  name="id"
+                  name="id" key={record.id}      
                 > <p>{text}</p></Form.Item>
               );
             } else {
@@ -56,7 +56,7 @@ const TaskListForm: React.FC = () =>
             if(editingRow === record.id){
               return (
                 <Form.Item
-                  name="description"
+                  name="description" key={record.description}
                   rules={[
                     {
                       required:true,
@@ -76,18 +76,18 @@ const TaskListForm: React.FC = () =>
             if(editingRow === record.id){
               return (
                 <Form.Item
-                  name="taskType"
+                  name="taskType" key={record.taskType}
                   rules={[
                     {
                       required:true,
                       message: "Pole wymagane"
                     }
                   ]}>                
-                  <Radio.Group onChange={radioOnChangeEdit} value={taskTypeEdit} >
+                  <Radio.Group onChange={radioOnChangeEdit} value={taskTypeEdit} key={"radioGroupEdit"}>
                   <Space direction="vertical">
-                    <Radio value={TaskType.EMAIL}>Email</Radio>
-                    <Radio value={TaskType.TELEFON}>Telefon</Radio>
-                    <Radio value={TaskType.ZADANIE}>Zadanie</Radio>         
+                    <Radio key={0} value={TaskType.EMAIL}>Email</Radio>
+                    <Radio key={1} value={TaskType.TELEFON}>Telefon</Radio>
+                    <Radio key={2} value={TaskType.ZADANIE}>Zadanie</Radio>         
                   </Space>
                 </Radio.Group></Form.Item>
               );
@@ -103,7 +103,7 @@ const TaskListForm: React.FC = () =>
             if(editingRow === record.id){
               return (
                 <Form.Item
-                  name="priority"
+                  name="priority" key={record.priority}
                   rules={[
                     {
                       required:true,
@@ -123,7 +123,7 @@ const TaskListForm: React.FC = () =>
             if(editingRow === record.id){
               return (
                 <Form.Item
-                  name="completed"
+                  name="completed" key={record.completed}
                   rules={[
                     {
                       required:true,
@@ -176,8 +176,8 @@ const TaskListForm: React.FC = () =>
       ];
 
       return (
-        <Form form={form} onFinish={updateTask}>
-            <Table columns={columns} dataSource={getAllTasksRedux} key={"table1"}/>
+        <Form form={form} onFinish={updateTask} key={"table1"}>
+            <Table columns={columns} dataSource={getAllTasksRedux} />
         </Form>
       )
 
