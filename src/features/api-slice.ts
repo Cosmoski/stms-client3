@@ -4,7 +4,7 @@ import { NewTask, Task, TaskQuery, TestOcelotMsg } from '../models';
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:5246/',
+        baseUrl: 'http://localhost:8001/', //5246
         prepareHeaders(headers){
             headers.set('Content-Type', 'application/json; charset=utf-8');    
             return headers;
